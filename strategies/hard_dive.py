@@ -1,4 +1,4 @@
-from dive import  DiveStrategy
+from .dive import  DiveStrategy
 import numpy as np
 class harddive(DiveStrategy):
     def compute_Y(self, ctx):

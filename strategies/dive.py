@@ -1,4 +1,4 @@
-from base import BesiegeStrategy
+from .base import BesiegeStrategy
 from abc import ABC, abstractmethod
 import numpy as np
 from operators.levy import levy_flight
@@ -8,10 +8,6 @@ class DiveStrategy(BesiegeStrategy, ABC):
         pass
 
 
-
-
-
-    @abstractmethod
     def besiege(self, ctx):
         Y = self.compute_Y(ctx)
         Z=(Y + np.random.rand(len(ctx.Xi))*levy_flight(len(ctx.Xi)))

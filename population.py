@@ -22,6 +22,6 @@ class Population:
         return np.min(self.fitness)
     def mean_position(self):
         return np.mean(self.positions, axis=0)
-    def clip_positions(self):
+    def clip(self):
         self.positions = np.clip(self.positions, self.lb, self.ub)
     

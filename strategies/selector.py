@@ -1,7 +1,7 @@
-from soft_besiege import softbeiege
-from hard_besiege import hardbesiege
-from soft_dive import softdive
-from hard_dive import harddive
+from .soft_besiege import softbeiege
+from .hard_besiege import hardbesiege
+from .soft_dive import softdive
+from .hard_dive import harddive
 
 
 class StrategySelector:
@@ -16,3 +16,4 @@ class StrategySelector:
             return softdive()
         else:
             return harddive()
+        
