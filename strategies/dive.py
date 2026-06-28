@@ -11,14 +11,13 @@ class DiveStrategy(BesiegeStrategy, ABC):
     def besiege(self, ctx):
         Y = self.compute_Y(ctx)
         Z=(Y + np.random.rand(len(ctx.Xi))*levy_flight(len(ctx.Xi)))
-        fx=ctx.objective(ctx.Xi)
-        fz=ctx.objective(Z)
-        fy=ctx.objective(Y)
-
-        if fy<fx :
-            return Y
-        elif fz<fx:
-            return Z
-        else:
-            return ctx.Xi
-        
+        #fx=ctx.objective(ctx.Xi)
+        #fz=ctx.objective(Z)
+        #fy=ctx.objective(Y)
+        #if fy<fx :
+        #    return Y
+        #elif fz<fx:
+        #    return Z
+        #else:
+         #   return ctx.Xi
+        return Y, Z

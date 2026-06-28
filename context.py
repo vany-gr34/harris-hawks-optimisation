@@ -8,6 +8,7 @@ class Context:
     rabbit: np.ndarray
     population: np.ndarray
     Xmean: np.ndarray
+    continuous_population :np.ndarray
     E: float
     J: float
     lb :float

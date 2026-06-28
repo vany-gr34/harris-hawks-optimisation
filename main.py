@@ -1,17 +1,16 @@
 from hho import HHO
-from benshmarks.sphere import shpere
+from problems.tsp import TSPProblem
 
+problem = TSPProblem()
 
 optimizer = HHO(
-    objective=shpere,
-    dim=30,
-    lb=-100,
-    ub=100,
-    population_size=30,
-    max_iterations=500
+    objective=problem.evaluate,
+    dim=5,
+    population_size=20,
+    max_iterations=100,
 )
 
-best_position, best_fitness = optimizer.optimize()
+best_route, best_cost = optimizer.optimize()
 
-print("Best Fitness :", best_fitness)
-print("Best Position :", best_position)
+print(best_route)
+print(best_cost)
