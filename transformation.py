@@ -1,4 +1,6 @@
-import numpy as np 
+import numpy as np
+
+from benshmarks.tsp import transformation 
 
 
 
@@ -10,8 +12,9 @@ class Transformation:
 
     def forward_transform(self, permutation):
         z=np.empty(len(permutation))
+
         for i , x in enumerate(permutation):
-            z[i] = self.lb + (self.ub - self.lb) * x / (len(permutation) - 1)
+            z[i] = self.lb + (self.ub - self.lb) * (x - 1) / (len(permutation) - 1)
         return z
 
     def backward_transform(self, transformation):
@@ -23,3 +26,5 @@ class Transformation:
         return permutation    
     def clip(self, transformation):
         return np.clip(transformation, self.lb, self.ub)
+
+    
