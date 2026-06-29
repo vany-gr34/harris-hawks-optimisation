@@ -11,6 +11,44 @@ class DiveStrategy(BesiegeStrategy, ABC):
     def besiege(self, ctx):
         Y = self.compute_Y(ctx)
         Z=(Y + np.random.rand(len(ctx.Xi))*levy_flight(len(ctx.Xi)))
+
+        Y = np.clip(Y, ctx.lb, ctx.ub)
+        Z = np.clip(Z, ctx.lb, ctx.ub)
+ 
+        f_Xi = ctx.continuous_objective(ctx.Xi)
+        f_Y  = ctx.continuous_objective(Y)
+        f_Z  = ctx.continuous_objective(Z)
+ 
+        if f_Y < f_Xi and f_Y <= f_Z:
+            return Y
+        elif f_Z < f_Xi:
+            return Z
+        else:
+            return ctx.Xi 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         #fx=ctx.objective(ctx.Xi)
         #fz=ctx.objective(Z)
         #fy=ctx.objective(Y)
@@ -20,4 +58,4 @@ class DiveStrategy(BesiegeStrategy, ABC):
         #    return Z
         #else:
          #   return ctx.Xi
-        return Y, Z
+  

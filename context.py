@@ -14,4 +14,5 @@ class Context:
     lb :float
     ub : float
    
-    objective: Callable
+    #objective: Callable
+    continuous_objective: Callable[[np.ndarray], float]

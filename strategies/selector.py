@@ -6,7 +6,7 @@ from .hard_dive import harddive
 
 class StrategySelector:
     @staticmethod
-    def select_strategy(r:float, E: float):
+    def select(r:float, E: float):
         if r >= 0.5 and abs(E) >= 0.5:
             return softbeiege()
 
