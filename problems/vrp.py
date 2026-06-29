@@ -16,7 +16,7 @@ class VRPProblem:
     """
 
     def __init__(self):
-        # Distance matrix: node 0 = depot, nodes 1-6 = customers
+       
         self.distance = np.array([
             # 0   1   2   3   4   5   6
             [0,  12, 18, 10, 22, 15, 20],  # 0 depot

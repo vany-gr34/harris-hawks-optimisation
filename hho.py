@@ -31,11 +31,7 @@ class HHO:
         ])
         self.population.evaluate(self.objective)
 
-    # ------------------------------------------------------------------
-    # Central bridge: continuous vector → discrete fitness
-    # This is the ONLY place backward_transform and repair are called.
-    # Strategies receive this as ctx.continuous_objective.
-    # ------------------------------------------------------------------
+
     def _continuous_objective(self, x: np.ndarray) -> float:
         x_clipped = self.transformation.clip(x)
         permutation = self.transformation.backward_transform(x_clipped)

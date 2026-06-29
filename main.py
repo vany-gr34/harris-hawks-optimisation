@@ -3,7 +3,7 @@ from problems.tsp import TSPProblem
 from problems.vrp import VRPProblem
 
 
-# ── TSP ────────────────────────────────────────────────────────────────
+
 print("=" * 40)
 print("TSP — 5 cities")
 print("=" * 40)
@@ -22,7 +22,7 @@ print("Best route:", best_route)
 print("Best cost: ", best_cost)
 
 
-# ── VRP ────────────────────────────────────────────────────────────────
+
 print()
 print("=" * 40)
 print("VRP — 6 customers, capacity=40")
