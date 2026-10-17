@@ -1,5 +1,8 @@
-from .base import BesiegeStrategy
 import numpy as np
-class hardbesiege(BesiegeStrategy):
+
+from .base import BesiegeStrategy
+
+
+class HardBesiege(BesiegeStrategy):
     def besiege(self, ctx):
-        return ctx.rabbit -ctx.E * np.abs(ctx.rabbit - ctx.Xi)
+        return ctx.rabbit - ctx.E * np.abs(ctx.rabbit - ctx.Xi)

@@ -1,30 +1,41 @@
 import numpy as np
 
-from benshmarks.tsp import transformation 
-
-
 
 class Transformation:
+    """Maps between 1-based permutations and the continuous box [lb, ub]^n.
 
-    def __init__(self, ub=1, lb=-1):
-        self.ub = ub
+    forward_transform : label x in {1..n}  ->  lb + (ub - lb) * (x - 1) / (n - 1)
+    backward_transform: continuous value   ->  nearest label (``decoding="round"``)
+                        or rank of the value (``decoding="rank"``)
+
+    ``decoding="round"`` can produce duplicates, so the result must go through
+    ``Repair``. ``decoding="rank"`` (Smallest Position Value rule) always yields
+    a valid permutation and needs no repair.
+    """
+
+    def __init__(self, lb=-1, ub=1, decoding="round"):
+        if decoding not in ("round", "rank"):
+            raise ValueError("decoding must be 'round' or 'rank'")
         self.lb = lb
+        self.ub = ub
+        self.decoding = decoding
 
     def forward_transform(self, permutation):
-        z=np.empty(len(permutation))
+        permutation = np.asarray(permutation, dtype=float)
+        n = len(permutation)
+        if n == 1:
+            return np.array([float(self.lb)])
+        return self.lb + (self.ub - self.lb) * (permutation - 1) / (n - 1)
 
-        for i , x in enumerate(permutation):
-            z[i] = self.lb + (self.ub - self.lb) * (x - 1) / (len(permutation) - 1)
-        return z
+    def backward_transform(self, z):
+        z = np.asarray(z, dtype=float)
+        n = len(z)
+        if self.decoding == "rank":
+            return np.argsort(np.argsort(z, kind="stable"), kind="stable") + 1
+        if n == 1:
+            return np.array([1])
+        x = np.rint((z - self.lb) / (self.ub - self.lb) * (n - 1)).astype(int) + 1
+        return np.clip(x, 1, n)
 
-    def backward_transform(self, transformation):
-        permutation=np.empty(len(transformation), dtype=int)
-        for i , z in enumerate(transformation):
-            x = round((z - self.lb) / (self.ub - self.lb) * (len(transformation) - 1)) +1
-
-            permutation[i] = x  
-        return permutation    
-    def clip(self, transformation):
-        return np.clip(transformation, self.lb, self.ub)
-
-    
+    def clip(self, z):
+        return np.clip(z, self.lb, self.ub)

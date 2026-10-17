@@ -1,5 +1,8 @@
-from .dive import  DiveStrategy
 import numpy as np
-class harddive(DiveStrategy):
+
+from .dive import DiveStrategy
+
+
+class HardDive(DiveStrategy):
     def compute_Y(self, ctx):
-        return ctx.rabbit -ctx.E * np.abs(ctx.J * ctx.rabbit - ctx.Xmean)
+        return ctx.rabbit - ctx.E * np.abs(ctx.J * ctx.rabbit - ctx.Xmean)
